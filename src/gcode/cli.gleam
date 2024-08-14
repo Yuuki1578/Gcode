@@ -1,6 +1,7 @@
 import argv
-import gleam/int
 import gleam/io
+
+pub const version_major = "1.0.0"
 
 pub type Command(file, keys) {
   Help
@@ -30,6 +31,10 @@ pub fn help() {
   io.println("Version     : gcode version")
 }
 
-pub fn main() {
-  help()
+pub fn version() {
+  io.println("Gcode version " <> version_major)
+}
+
+pub fn undefined() {
+  io.println("option error: type \"gcode help\" for more information")
 }
