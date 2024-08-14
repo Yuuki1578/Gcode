@@ -5,6 +5,10 @@ import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/string
 
+/// # Encode raw ASCII string into Caesar Token
+/// ```gleam
+/// pub fn encode(stream: String, key: Int) -> String
+/// ```
 pub fn encode(stream: String, key: Int) -> String {
   let return =
     stream
@@ -62,8 +66,28 @@ pub fn decode(stream: String, key: Int) -> String {
 
       case char < 97 || char > 122 {
         True -> {
-          let assert Ok(success) = char |> string.utf_codepoint
-          success
+          case char < 65 || char > 90 {
+            True -> {
+              case char < 48 || char > 57 {
+                True -> {
+                  let assert Ok(success) = char |> string.utf_codepoint
+                  success
+                }
+
+                False -> {
+                  let fixed = { char - 48 - key + 10 } % 10 + 48
+                  let assert Ok(success) = fixed |> string.utf_codepoint
+                  success
+                }
+              }
+            }
+
+            False -> {
+              let fixed = { char - 65 - key + 26 } % 26 + 65
+              let assert Ok(success) = fixed |> string.utf_codepoint
+              success
+            }
+          }
         }
 
         False -> {
