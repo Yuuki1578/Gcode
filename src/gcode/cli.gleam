@@ -36,5 +36,5 @@ pub fn version() {
 }
 
 pub fn undefined() {
-  io.println("option error: type \"gcode help\" for more information")
+  io.println("error: type \"gcode help\" for more information")
 }
