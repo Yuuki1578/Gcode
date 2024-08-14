@@ -1,5 +1,7 @@
-import gleam/io
+import gcode/cli
+import gcode/file
+import gcode/utils
 
 pub fn main() {
-  io.println("Hello from gcode!")
+  todo
 }
